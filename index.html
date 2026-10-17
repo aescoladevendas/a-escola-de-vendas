@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Escola de Vendas</title>
+<meta name="description" content="Ninguém nasce vendedor. Vendedor se forma. O método em 5 etapas para vender mais, negociar melhor e acelerar a carreira comercial.">
+<link rel="canonical" href="https://aescoladevendas.github.io/a-escola-de-vendas/">
+<meta property="og:type" content="book">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="A Escola de Vendas">
+<meta property="og:description" content="Ninguém nasce vendedor. Vendedor se forma. O método em 5 etapas, do dado ao acordo, com 60 exercícios com resposta.">
+<meta property="og:url" content="https://aescoladevendas.github.io/a-escola-de-vendas/">
+<meta property="og:image" content="https://aescoladevendas.github.io/a-escola-de-vendas/assets/capa-escola-de-vendas.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Página do livro 1 (link da bio). Conteúdo antes de propaganda e nenhum dado pessoal à mostra.
+   Fundo azul-noite mais claro, com piso em perspectiva e trilhas de luz, como no carrossel. */
+:root {
+  --fundo1: #0B1D30; --fundo2: #10294A; --fundo3: #153658; --painel: rgba(10, 26, 44, 0.82);
+  --gelo: #F1F6F8; --nevoa: #C9D6DF; --cinza: #9AABB7; --amarelo: #FFC72C; --azul: #61CEF2; --tinta: #0B1B2B;
+  --linha: rgba(241, 246, 248, 0.14);
+  --titulo: "Barlow Condensed", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+  --texto: "Manrope", "Avenir Next", "Helvetica Neue", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--gelo); font: 400 17px/1.6 var(--texto); -webkit-font-smoothing: antialiased; background: var(--fundo1);
+  background-image:
+    radial-gradient(760px 520px at 92% 0%, rgba(97, 206, 242, 0.26), transparent 65%),
+    radial-gradient(620px 480px at 0% 85%, rgba(255, 199, 44, 0.12), transparent 65%),
+    linear-gradient(180deg, var(--fundo1) 0%, var(--fundo2) 55%, var(--fundo3) 100%);
+  min-height: 100vh; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.shell { position: relative; z-index: 1; width: 100%; max-width: 1000px; margin: 0 auto;
+  padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; border-radius: 8px; }
+.piso { position: fixed; left: 0; right: 0; bottom: 0; height: 46vh; z-index: 0; pointer-events: none; width: 100%; }
+.olho { font: 700 13px/1.4 var(--texto); letter-spacing: 0.2em; text-transform: uppercase; color: var(--azul); display: flex; align-items: center; gap: 12px; }
+.olho::before { content: ""; width: 34px; height: 2px; background: linear-gradient(90deg, var(--amarelo), var(--azul)); flex: none; }
+h1, h2 { font-family: var(--titulo); font-weight: 800; text-transform: uppercase; margin: 14px 0 0; line-height: 0.95; text-wrap: balance; }
+h1 { font-size: clamp(52px, 10vw, 96px); }
+h2 { font-size: clamp(36px, 6vw, 56px); }
+.am { color: var(--amarelo); }
+.lede { color: var(--nevoa); font-size: clamp(18px, 2.2vw, 20px); margin: 18px 0 0; max-width: 34em; }
+
+.topo { padding-block: 18px; }
+.marca { font: 600 13px/1 var(--texto); letter-spacing: 0.34em; text-transform: uppercase; text-decoration: none; color: var(--nevoa); }
+.marca b { color: var(--amarelo); }
+
+.abertura { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 36px; align-items: center; padding-block: 24px 48px; }
+.capa { justify-self: center; width: min(340px, 74vw); transform: rotate(3deg); border-radius: 10px; border: 2px solid rgba(241, 246, 248, 0.22); }
+@media (max-width: 800px) { .abertura { grid-template-columns: minmax(0, 1fr); } .capa { grid-row: 1; } }
+.fatos { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+.fatos span { font: 600 14px/1 var(--texto); padding: 10px 13px; border-radius: 999px; border: 1px solid rgba(97, 206, 242, 0.45); background: var(--painel); }
+.pedido { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.valor { font: 600 15px/1.3 var(--texto); color: var(--nevoa); }
+.valor b { display: block; font: 800 46px/1 var(--titulo); color: var(--amarelo); }
+.zap { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 17px/1 var(--texto);
+  color: var(--tinta); background: var(--amarelo); padding: 16px 22px; border-radius: 999px; }
+.zap:hover { background: #FFD45A; }
+.zap svg { width: 20px; height: 20px; flex: none; }
+
+.secao { padding-block: 48px; border-top: 1px solid var(--linha); }
+.etapas { margin-top: 24px; display: grid; gap: 10px; }
+.etapa { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; padding: 14px 18px; border-radius: 14px; background: var(--painel); border: 1px solid rgba(97, 206, 242, 0.28); }
+.etapa .n { font: 800 32px/1 var(--titulo); color: var(--amarelo); }
+.etapa b { display: block; font: 800 21px/1.1 var(--titulo); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azul); }
+.lista { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.lista li { padding-left: 26px; position: relative; color: var(--nevoa); }
+.lista li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--azul); }
+.rodape { border-top: 1px solid var(--linha); margin-top: 32px; position: relative; z-index: 1; }
+.rodape .shell { padding-block: 22px calc(22px + env(safe-area-inset-bottom, 0px)); color: var(--cinza); font: 600 13px/1.5 var(--texto); }
+</style>
+</head>
+<body>
+<svg class="piso" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="p" x1="0" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#61CEF2" stop-opacity="0"/><stop offset="0.4" stop-color="#61CEF2" stop-opacity="0.14"/><stop offset="1" stop-color="#61CEF2" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="h" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE7A3" stop-opacity="0"/><stop offset="0.5" stop-color="#FFE7A3" stop-opacity="0.45"/><stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#p)" stroke-width="1.4">
+    <line x1="600" y1="0" x2="-700" y2="500"/><line x1="600" y1="0" x2="-450" y2="500"/><line x1="600" y1="0" x2="-200" y2="500"/>
+    <line x1="600" y1="0" x2="50" y2="500"/><line x1="600" y1="0" x2="300" y2="500"/><line x1="600" y1="0" x2="550" y2="500"/>
+    <line x1="600" y1="0" x2="800" y2="500"/><line x1="600" y1="0" x2="1050" y2="500"/><line x1="600" y1="0" x2="1300" y2="500"/>
+    <line x1="600" y1="0" x2="1550" y2="500"/><line x1="600" y1="0" x2="1800" y2="500"/><line x1="600" y1="0" x2="2050" y2="500"/>
+  </g>
+  <g stroke="#61CEF2">
+    <line x1="0" y1="12" x2="1200" y2="12" stroke-opacity="0.06"/><line x1="0" y1="40" x2="1200" y2="40" stroke-opacity="0.08"/>
+    <line x1="0" y1="82" x2="1200" y2="82" stroke-opacity="0.1"/><line x1="0" y1="140" x2="1200" y2="140" stroke-opacity="0.13"/>
+    <line x1="0" y1="215" x2="1200" y2="215" stroke-opacity="0.16"/><line x1="0" y1="305" x2="1200" y2="305" stroke-opacity="0.2"/>
+    <line x1="0" y1="410" x2="1200" y2="410" stroke-opacity="0.24"/>
+  </g>
+  <rect x="0" y="0" width="1200" height="2" fill="url(#h)"/>
+  <path d="M -40 300 C 300 120, 820 100, 1240 -20" fill="none" stroke="#FFC72C" stroke-opacity="0.22" stroke-width="2"/>
+</svg>
+
+<header class="shell topo"><a class="marca" href="#inicio">A Escola de <b>Vendas</b></a></header>
+
+<main id="inicio">
+  <section class="shell abertura" aria-labelledby="h1">
+    <div>
+      <div class="olho">Livro</div>
+      <h1 id="h1">Ninguém nasce vendedor. <span class="am">Vendedor se forma.</span></h1>
+      <p class="lede">O método em 5 etapas para vender mais, negociar melhor e acelerar a carreira comercial, do dado ao acordo.</p>
+      <div class="fatos"><span>6 capítulos</span><span>60 exercícios com resposta</span><span>44 exemplos resolvidos</span><span>298 páginas</span></div>
+      <div class="pedido">
+        <div class="valor">Livro físico<b>R$ 49,90</b></div>
+        <a class="zap" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
+          Pedir pelo WhatsApp</a>
+      </div>
+    </div>
+    <img class="capa" src="assets/capa-escola-de-vendas.jpg" alt="Capa do livro A Escola de Vendas" width="340" height="480">
+  </section>
+
+  <section class="secao" aria-labelledby="h-metodo">
+    <div class="shell">
+      <div class="olho">O que você vai aprender</div>
+      <h2 id="h-metodo">Cinco etapas, na ordem em que <span class="am">o trabalho acontece.</span></h2>
+      <div class="etapas">
+        <div class="etapa"><span class="n">01</span><div><b>Dados</b>Ler o número certo antes de opinar</div></div>
+        <div class="etapa"><span class="n">02</span><div><b>Categoria</b>Achar onde o shopper pode comprar mais</div></div>
+        <div class="etapa"><span class="n">03</span><div><b>Valor</b>Fazer a conta nos dois P&amp;Ls, o seu e o do cliente</div></div>
+        <div class="etapa"><span class="n">04</span><div><b>Venda</b>Conduzir a conversa do objetivo ao fechamento</div></div>
+        <div class="etapa"><span class="n">05</span><div><b>Acordo</b>Negociar com limite, troca e contrapartida</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" aria-labelledby="h-dentro">
+    <div class="shell">
+      <div class="olho">Dentro do livro</div>
+      <h2 id="h-dentro">Para estudar, praticar e <span class="am">levar para a rua.</span></h2>
+      <ul class="lista">
+        <li>Exercícios com resposta ao fim de cada capítulo</li>
+        <li>Fórmulas e cálculos de cada etapa</li>
+        <li>Listas de verificação para usar em campo</li>
+        <li>Modelos de frases para propor, fechar e negociar</li>
+        <li>Um caso completo, do diagnóstico ao acordo</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape"><div class="shell">A Escola de Vendas · © 2026</div></footer>
+</body>
+</html>
