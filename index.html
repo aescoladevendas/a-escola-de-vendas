@@ -9,18 +9,20 @@
 <meta property="og:type" content="book">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="A Escola de Vendas">
-<meta property="og:description" content="Ninguém nasce vendedor. Vendedor se forma. O método em 5 etapas, do dado ao acordo, com 60 exercícios com resposta.">
+<meta property="og:description" content="Ninguém nasce vendedor. Vendedor se forma. Comece sua formação em vendas com o método em 5 etapas e 60 exercícios com resposta.">
 <meta property="og:url" content="https://aescoladevendas.github.io/a-escola-de-vendas/">
 <meta property="og:image" content="https://aescoladevendas.github.io/a-escola-de-vendas/assets/capa-escola-de-vendas.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add('js');</script>
 <style>
-/* Página do livro 1 (link da bio). Conteúdo antes de propaganda e nenhum dado pessoal à mostra.
-   Fundo azul-noite mais claro, com piso em perspectiva e trilhas de luz, como no carrossel. */
+/* Página do livro 1 para o link da bio. Movimento com propósito: piso futurista andando, constelação, pulsos de luz,
+   capa flutuando, chamadas que se digitam e entram ao rolar. Sem dados pessoais, sem casos.
+   Tudo continua legível sem JavaScript e sem animação (prefers-reduced-motion). */
 :root {
-  --fundo1: #0B1D30; --fundo2: #10294A; --fundo3: #153658; --painel: rgba(10, 26, 44, 0.82);
+  --fundo1: #0B1D30; --fundo2: #10294A; --fundo3: #153658; --painel: rgba(10, 26, 44, 0.78);
   --gelo: #F1F6F8; --nevoa: #C9D6DF; --cinza: #9AABB7; --amarelo: #FFC72C; --azul: #61CEF2; --tinta: #0B1B2B;
   --linha: rgba(241, 246, 248, 0.14);
   --titulo: "Barlow Condensed", "Avenir Next Condensed", "Arial Narrow", sans-serif;
@@ -28,115 +30,202 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { margin: 0; color: var(--gelo); font: 400 17px/1.6 var(--texto); -webkit-font-smoothing: antialiased; background: var(--fundo1);
-  background-image:
-    radial-gradient(760px 520px at 92% 0%, rgba(97, 206, 242, 0.26), transparent 65%),
-    radial-gradient(620px 480px at 0% 85%, rgba(255, 199, 44, 0.12), transparent 65%),
-    linear-gradient(180deg, var(--fundo1) 0%, var(--fundo2) 55%, var(--fundo3) 100%);
-  min-height: 100vh; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--gelo); font: 400 17px/1.6 var(--texto); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  background: linear-gradient(180deg, var(--fundo1) 0%, var(--fundo2) 55%, var(--fundo3) 100%) fixed var(--fundo1); }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-.shell { position: relative; z-index: 1; width: 100%; max-width: 1000px; margin: 0 auto;
+.shell { position: relative; z-index: 2; width: 100%; max-width: 1040px; margin: 0 auto;
   padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
 :focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; border-radius: 8px; }
-.piso { position: fixed; left: 0; right: 0; bottom: 0; height: 46vh; z-index: 0; pointer-events: none; width: 100%; }
+
+/* ---------- cenário animado ---------- */
+.cena { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.brilho { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; }
+.brilho.b1 { width: 520px; height: 520px; right: -140px; top: -160px; background: radial-gradient(circle, rgba(97,206,242,.55), transparent 65%); animation: flutua 14s ease-in-out infinite alternate; }
+.brilho.b2 { width: 460px; height: 460px; left: -160px; bottom: 8vh; background: radial-gradient(circle, rgba(255,199,44,.35), transparent 65%); animation: flutua 18s ease-in-out infinite alternate-reverse; }
+@keyframes flutua { from { transform: translate(0, 0) scale(1); } to { transform: translate(-40px, 50px) scale(1.12); } }
+#estrelas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.horizonte { position: absolute; left: 0; right: 0; bottom: 42vh; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,231,163,.75), transparent); box-shadow: 0 0 18px rgba(255,199,44,.55); }
+.sol { position: absolute; left: 50%; bottom: calc(42vh - 120px); width: 240px; height: 240px; margin-left: -120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,231,163,.35), rgba(255,199,44,.08) 45%, transparent 70%); animation: respira 5s ease-in-out infinite; }
+@keyframes respira { 50% { transform: scale(1.12); opacity: .8; } }
+.piso { position: absolute; left: -50%; width: 200%; bottom: -2vh; height: 44vh; transform-origin: 50% 0;
+  transform: perspective(420px) rotateX(64deg);
+  background-image: linear-gradient(rgba(97,206,242,.42) 2px, transparent 2px), linear-gradient(90deg, rgba(97,206,242,.32) 2px, transparent 2px);
+  background-size: 70px 70px; animation: corre 2.6s linear infinite;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%); mask-image: linear-gradient(to bottom, transparent 0%, #000 35%); }
+@keyframes corre { to { background-position: 0 70px, 0 0; } }
+.circuito { position: absolute; inset: 0; width: 100%; height: 100%; }
+.circuito path { fill: none; stroke: rgba(97,206,242,.28); stroke-width: 2; }
+.circuito .pulso { stroke: #9FE6FF; stroke-width: 3; stroke-dasharray: 26 520; stroke-linecap: round; animation: pulso 4.5s linear infinite; filter: drop-shadow(0 0 6px #61CEF2); }
+.circuito .pulso.p2 { animation-duration: 6s; animation-delay: -2s; stroke: #FFE7A3; filter: drop-shadow(0 0 6px #FFC72C); }
+.circuito .pulso.p3 { animation-duration: 5.2s; animation-delay: -3.5s; }
+@keyframes pulso { from { stroke-dashoffset: 546; } to { stroke-dashoffset: 0; } }
+
+/* ---------- tipos ---------- */
 .olho { font: 700 13px/1.4 var(--texto); letter-spacing: 0.2em; text-transform: uppercase; color: var(--azul); display: flex; align-items: center; gap: 12px; }
 .olho::before { content: ""; width: 34px; height: 2px; background: linear-gradient(90deg, var(--amarelo), var(--azul)); flex: none; }
 h1, h2 { font-family: var(--titulo); font-weight: 800; text-transform: uppercase; margin: 14px 0 0; line-height: 0.95; text-wrap: balance; }
-h1 { font-size: clamp(52px, 10vw, 96px); }
-h2 { font-size: clamp(36px, 6vw, 56px); }
+h1 { font-size: clamp(54px, 10.5vw, 104px); }
+h2 { font-size: clamp(38px, 6.4vw, 60px); }
 .am { color: var(--amarelo); }
-.lede { color: var(--nevoa); font-size: clamp(18px, 2.2vw, 20px); margin: 18px 0 0; max-width: 34em; }
+.lede { color: var(--nevoa); font-size: clamp(18px, 2.2vw, 20px); margin: 16px 0 0; max-width: 34em; }
+.brilha { background: linear-gradient(100deg, #FFC72C 0%, #FFC72C 40%, #FFF6D6 50%, #FFC72C 60%, #FFC72C 100%); background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: varre 3.8s ease-in-out infinite; }
+@keyframes varre { from { background-position: 100% 0; } to { background-position: -150% 0; } }
 
-.topo { padding-block: 18px; }
+/* ---------- topo e abertura ---------- */
+.topo { padding-block: 18px; display: flex; justify-content: space-between; align-items: center; }
 .marca { font: 600 13px/1 var(--texto); letter-spacing: 0.34em; text-transform: uppercase; text-decoration: none; color: var(--nevoa); }
 .marca b { color: var(--amarelo); }
-
-.abertura { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 36px; align-items: center; padding-block: 24px 48px; }
-.capa { justify-self: center; width: min(340px, 74vw); transform: rotate(3deg); border-radius: 10px; border: 2px solid rgba(241, 246, 248, 0.22); }
-@media (max-width: 800px) { .abertura { grid-template-columns: minmax(0, 1fr); } .capa { grid-row: 1; } }
-.fatos { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
-.fatos span { font: 600 14px/1 var(--texto); padding: 10px 13px; border-radius: 999px; border: 1px solid rgba(97, 206, 242, 0.45); background: var(--painel); }
-.pedido { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.topo .pill { font: 700 13px/1 var(--texto); text-decoration: none; padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,199,44,.6); color: var(--amarelo); }
+.abertura { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 36px; align-items: center; padding-block: 20px 40px; }
+@media (max-width: 800px) { .abertura { grid-template-columns: minmax(0, 1fr); gap: 26px; } .moldura-capa { grid-row: 1; } }
+.digita { margin-top: 18px; min-height: 2.6em; font: 700 clamp(20px, 3vw, 26px)/1.3 var(--texto); color: var(--gelo); }
+.digita .cursor { display: inline-block; width: 3px; height: 1em; margin-left: 3px; vertical-align: -0.12em; background: var(--amarelo); animation: pisca 1s steps(1) infinite; }
+@keyframes pisca { 50% { opacity: 0; } }
+.moldura-capa { justify-self: center; position: relative; width: min(330px, 70vw); animation: boia 6s ease-in-out infinite; }
+.moldura-capa::before { content: ""; position: absolute; inset: 8% -12% -10%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,199,44,.38), transparent); filter: blur(10px); z-index: -1; }
+.capa { position: relative; border-radius: 10px; border: 2px solid rgba(241, 246, 248, 0.25); transform: rotate(3deg); overflow: hidden; }
+.capa img { width: 100%; }
+.capa::after { content: ""; position: absolute; top: -30%; bottom: -30%; width: 38%; left: -60%; transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent); animation: reflexo 4.5s ease-in-out infinite; }
+@keyframes boia { 50% { transform: translateY(-12px); } }
+@keyframes reflexo { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+.chamada { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
 .valor { font: 600 15px/1.3 var(--texto); color: var(--nevoa); }
 .valor b { display: block; font: 800 46px/1 var(--titulo); color: var(--amarelo); }
-.zap { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 17px/1 var(--texto);
-  color: var(--tinta); background: var(--amarelo); padding: 16px 22px; border-radius: 999px; }
-.zap:hover { background: #FFD45A; }
+.zap { position: relative; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 17px/1 var(--texto);
+  color: var(--tinta); background: var(--amarelo); padding: 17px 24px; border-radius: 999px; overflow: hidden; isolation: isolate;
+  animation: chama 2.2s ease-out infinite; transition: transform .2s; }
+.zap:hover { transform: translateY(-2px) scale(1.02); }
+.zap::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; transform: skewX(-20deg); z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent); animation: reflexo 3.2s ease-in-out infinite; }
 .zap svg { width: 20px; height: 20px; flex: none; }
+@keyframes chama { 0% { box-shadow: 0 0 0 0 rgba(255,199,44,.6); } 70% { box-shadow: 0 0 0 16px rgba(255,199,44,0); } 100% { box-shadow: 0 0 0 0 rgba(255,199,44,0); } }
 
-.secao { padding-block: 48px; border-top: 1px solid var(--linha); }
-.etapas { margin-top: 24px; display: grid; gap: 10px; }
-.etapa { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; padding: 14px 18px; border-radius: 14px; background: var(--painel); border: 1px solid rgba(97, 206, 242, 0.28); }
-.etapa .n { font: 800 32px/1 var(--titulo); color: var(--amarelo); }
-.etapa b { display: block; font: 800 21px/1.1 var(--titulo); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azul); }
+/* ---------- faixa de chamadas ---------- */
+.faixa { position: relative; z-index: 2; overflow: hidden; border-block: 1px solid var(--linha); background: rgba(5, 12, 22, .55); }
+.faixa .trilho { display: flex; width: max-content; animation: corre-faixa 26s linear infinite; }
+.faixa span { display: inline-flex; align-items: center; gap: 22px; padding: 15px 11px; white-space: nowrap;
+  font: 800 22px/1 var(--titulo); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gelo); }
+.faixa em { font-style: normal; color: var(--amarelo); }
+@keyframes corre-faixa { to { transform: translateX(-50%); } }
+
+/* ---------- seções ---------- */
+.secao { position: relative; z-index: 2; padding-block: 52px; }
+.rev { transition: opacity .7s ease, transform .7s ease; }
+html.js .rev { opacity: 0; transform: translateY(28px); }
+html.js .rev.on { opacity: 1; transform: none; }
+.etapas { margin-top: 26px; display: grid; gap: 10px; position: relative; }
+.etapa { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; padding: 15px 18px; border-radius: 14px;
+  background: var(--painel); border: 1px solid rgba(97, 206, 242, 0.3); transition: border-color .3s, transform .3s; }
+.etapa:hover { border-color: var(--amarelo); transform: translateX(6px); }
+.etapa .n { font: 800 34px/1 var(--titulo); color: var(--amarelo); }
+.etapa b { display: block; font: 800 22px/1.1 var(--titulo); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azul); }
+html.js .etapas .etapa { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease, border-color .3s; }
+html.js .etapas.on .etapa { opacity: 1; transform: none; }
+.etapas.on .etapa:nth-child(2) { transition-delay: .12s; } .etapas.on .etapa:nth-child(3) { transition-delay: .24s; }
+.etapas.on .etapa:nth-child(4) { transition-delay: .36s; } .etapas.on .etapa:nth-child(5) { transition-delay: .48s; }
+.treino { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 26px;
+  padding: 26px; border-radius: 20px; background: var(--painel); border: 1px solid rgba(255,199,44,.5); }
+@media (max-width: 640px) { .treino { grid-template-columns: minmax(0, 1fr); } }
+.contador { font: 800 clamp(96px, 16vw, 150px)/0.9 var(--titulo); color: var(--amarelo); font-variant-numeric: tabular-nums; }
+.treino p { margin: 0; color: var(--nevoa); }
+.treino strong { display: block; color: var(--gelo); font: 800 26px/1.15 var(--titulo); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 8px; }
+.chips { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+.chips span { font: 700 15px/1 var(--texto); padding: 12px 15px; border-radius: 999px; border: 1px solid rgba(97, 206, 242, 0.45); background: var(--painel); }
+.chips span.am { border-color: rgba(255, 199, 44, 0.75); }
 .lista { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.lista li { padding-left: 26px; position: relative; color: var(--nevoa); }
-.lista li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--azul); }
-.rodape { border-top: 1px solid var(--linha); margin-top: 32px; position: relative; z-index: 1; }
+.lista li { padding-left: 28px; position: relative; color: var(--nevoa); }
+.lista li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 11px; height: 11px; border-radius: 50%; background: var(--azul); box-shadow: 0 0 10px var(--azul); }
+.final { text-align: center; padding: 40px 22px; border-radius: 24px; border: 1px solid rgba(255,199,44,.55);
+  background: radial-gradient(520px 260px at 50% 0%, rgba(255,199,44,.2), transparent 70%), var(--painel); }
+.final h2 { margin-inline: auto; max-width: 14em; }
+.final .lede { margin-inline: auto; }
+.final .chamada { justify-content: center; }
+.rodape { position: relative; z-index: 2; border-top: 1px solid var(--linha); margin-top: 24px; }
 .rodape .shell { padding-block: 22px calc(22px + env(safe-area-inset-bottom, 0px)); color: var(--cinza); font: 600 13px/1.5 var(--texto); }
+
+/* ---------- barra de pedido no celular ---------- */
+.barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: rgba(5, 12, 22, 0.94); border-top: 1px solid rgba(255,199,44,.35);
+  padding: 10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; transform: translateY(110%); transition: transform .4s ease; }
+.barra.on { transform: none; }
+.barra .txt { font: 800 19px/1.1 var(--titulo); text-transform: uppercase; letter-spacing: .03em; }
+.barra .txt small { display: block; font: 700 12px/1.3 var(--texto); letter-spacing: .12em; color: var(--amarelo); text-transform: uppercase; }
+.barra .zap { padding: 13px 18px; font-size: 15px; animation: none; }
+@media (min-width: 801px) { .barra { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html.js .rev, html.js .etapas .etapa { opacity: 1; transform: none; }
+  .brilha { color: var(--amarelo); background: none; }
+}
 </style>
 </head>
 <body>
-<svg class="piso" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
-  <defs>
-    <linearGradient id="p" x1="0" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#61CEF2" stop-opacity="0"/><stop offset="0.4" stop-color="#61CEF2" stop-opacity="0.14"/><stop offset="1" stop-color="#61CEF2" stop-opacity="0.3"/>
-    </linearGradient>
-    <linearGradient id="h" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFE7A3" stop-opacity="0"/><stop offset="0.5" stop-color="#FFE7A3" stop-opacity="0.45"/><stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <g stroke="url(#p)" stroke-width="1.4">
-    <line x1="600" y1="0" x2="-700" y2="500"/><line x1="600" y1="0" x2="-450" y2="500"/><line x1="600" y1="0" x2="-200" y2="500"/>
-    <line x1="600" y1="0" x2="50" y2="500"/><line x1="600" y1="0" x2="300" y2="500"/><line x1="600" y1="0" x2="550" y2="500"/>
-    <line x1="600" y1="0" x2="800" y2="500"/><line x1="600" y1="0" x2="1050" y2="500"/><line x1="600" y1="0" x2="1300" y2="500"/>
-    <line x1="600" y1="0" x2="1550" y2="500"/><line x1="600" y1="0" x2="1800" y2="500"/><line x1="600" y1="0" x2="2050" y2="500"/>
-  </g>
-  <g stroke="#61CEF2">
-    <line x1="0" y1="12" x2="1200" y2="12" stroke-opacity="0.06"/><line x1="0" y1="40" x2="1200" y2="40" stroke-opacity="0.08"/>
-    <line x1="0" y1="82" x2="1200" y2="82" stroke-opacity="0.1"/><line x1="0" y1="140" x2="1200" y2="140" stroke-opacity="0.13"/>
-    <line x1="0" y1="215" x2="1200" y2="215" stroke-opacity="0.16"/><line x1="0" y1="305" x2="1200" y2="305" stroke-opacity="0.2"/>
-    <line x1="0" y1="410" x2="1200" y2="410" stroke-opacity="0.24"/>
-  </g>
-  <rect x="0" y="0" width="1200" height="2" fill="url(#h)"/>
-  <path d="M -40 300 C 300 120, 820 100, 1240 -20" fill="none" stroke="#FFC72C" stroke-opacity="0.22" stroke-width="2"/>
-</svg>
+<div class="cena" aria-hidden="true">
+  <div class="brilho b1"></div><div class="brilho b2"></div>
+  <canvas id="estrelas"></canvas>
+  <svg class="circuito" viewBox="0 0 1200 800" preserveAspectRatio="none">
+    <path d="M 0 120 L 160 120 L 200 160 L 380 160"/><path class="pulso" d="M 0 120 L 160 120 L 200 160 L 380 160"/>
+    <path d="M 1200 260 L 1040 260 L 1000 220 L 820 220"/><path class="pulso p2" d="M 1200 260 L 1040 260 L 1000 220 L 820 220"/>
+    <path d="M 1200 470 L 1080 470 L 1040 510 L 900 510"/><path class="pulso p3" d="M 1200 470 L 1080 470 L 1040 510 L 900 510"/>
+    <path d="M 0 400 L 110 400 L 150 360 L 300 360"/><path class="pulso p2" d="M 0 400 L 110 400 L 150 360 L 300 360"/>
+  </svg>
+  <div class="sol"></div><div class="horizonte"></div><div class="piso"></div>
+</div>
 
-<header class="shell topo"><a class="marca" href="#inicio">A Escola de <b>Vendas</b></a></header>
+<header class="shell topo">
+  <a class="marca" href="#inicio">A Escola de <b>Vendas</b></a>
+  <a class="pill" href="#pedido">Quero o meu</a>
+</header>
 
 <main id="inicio">
   <section class="shell abertura" aria-labelledby="h1">
     <div>
-      <div class="olho">Livro</div>
-      <h1 id="h1">Ninguém nasce vendedor. <span class="am">Vendedor se forma.</span></h1>
-      <p class="lede">Para quem quer ganhar experiência em vendas: o método em 5 etapas para vender mais, negociar melhor e crescer na carreira comercial.</p>
-      <div class="fatos"><span>6 capítulos</span><span>60 exercícios com resposta</span><span>298 páginas</span></div>
-      <div class="pedido">
+      <div class="olho">Para quem quer ganhar experiência em vendas</div>
+      <h1 id="h1">Ninguém nasce vendedor. <span class="brilha">Vendedor se forma.</span></h1>
+      <p class="digita" aria-live="polite"><span id="frase">Aprenda a ler os números.</span><span class="cursor" aria-hidden="true"></span></p>
+      <p class="lede">O método em 5 etapas para você vender mais, negociar melhor e crescer na carreira comercial. Comece hoje.</p>
+      <div class="chamada">
         <div class="valor">Livro físico<b>R$ 49,90</b></div>
         <a class="zap" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>
-          Pedir pelo WhatsApp</a>
+          Quero começar agora</a>
       </div>
     </div>
-    <img class="capa" src="assets/capa-escola-de-vendas.jpg" alt="Capa do livro A Escola de Vendas" width="340" height="480">
+    <div class="moldura-capa"><div class="capa"><img src="assets/capa-escola-de-vendas.jpg" alt="Capa do livro A Escola de Vendas" width="330" height="466"></div></div>
   </section>
 
+  <div class="faixa" aria-hidden="true">
+    <div class="trilho">
+      <span>Vendedor se forma <em>✦</em> Ganhe experiência <em>✦</em> Treine no seu ritmo <em>✦</em> Negocie com segurança <em>✦</em> Comece hoje <em>✦</em></span>
+      <span>Vendedor se forma <em>✦</em> Ganhe experiência <em>✦</em> Treine no seu ritmo <em>✦</em> Negocie com segurança <em>✦</em> Comece hoje <em>✦</em></span>
+    </div>
+  </div>
+
   <section class="secao" aria-labelledby="h-exp">
-    <div class="shell">
-      <div class="olho">Experiência se constrói</div>
+    <div class="shell rev">
+      <div class="olho">Sua experiência começa agora</div>
       <h2 id="h-exp">Toda visita, todo pedido e toda negociação <span class="am">podem virar aprendizado.</span></h2>
-      <p class="lede">Quem está começando costuma aprender errando, na frente do cliente. Com método, você entende o que fez, por que funcionou e
-      o que fazer melhor na próxima vez. E treina antes, com 60 exercícios com resposta, no seu ritmo.</p>
-      <div class="fatos"><span>Para quem está começando</span><span>Para quem quer subir de nível</span><span>Para quem forma times</span></div>
+      <p class="lede">Quem está começando costuma aprender errando, na frente do cliente. Com método, você entende o que fez, por que funcionou
+      e o que fazer melhor na próxima vez. Cada semana em campo vale mais.</p>
+      <div class="chips"><span>Para quem está começando</span><span>Para quem quer subir de nível</span><span class="am">Para quem forma times</span></div>
     </div>
   </section>
 
   <section class="secao" aria-labelledby="h-metodo">
     <div class="shell">
-      <div class="olho">O que você vai aprender</div>
-      <h2 id="h-metodo">Cinco etapas, na ordem em que <span class="am">o trabalho acontece.</span></h2>
-      <div class="etapas">
+      <div class="rev">
+        <div class="olho">O caminho</div>
+        <h2 id="h-metodo">Cinco etapas, na ordem em que <span class="am">o trabalho acontece.</span></h2>
+      </div>
+      <div class="etapas" id="etapas">
         <div class="etapa"><span class="n">01</span><div><b>Dados</b>Ler o número certo antes de opinar</div></div>
         <div class="etapa"><span class="n">02</span><div><b>Categoria</b>Achar onde o shopper pode comprar mais</div></div>
         <div class="etapa"><span class="n">03</span><div><b>Valor</b>Fazer a conta nos dois P&amp;Ls, o seu e o do cliente</div></div>
@@ -146,20 +235,111 @@ h2 { font-size: clamp(36px, 6vw, 56px); }
     </div>
   </section>
 
-  <section class="secao" aria-labelledby="h-dentro">
-    <div class="shell">
-      <div class="olho">Dentro do livro</div>
-      <h2 id="h-dentro">Para estudar, praticar e <span class="am">levar para a rua.</span></h2>
+  <section class="secao" aria-labelledby="h-treino">
+    <div class="shell rev">
+      <div class="olho">Treine antes de ir para a rua</div>
+      <h2 id="h-treino">Pratique até <span class="am">ficar natural.</span></h2>
+      <div class="treino">
+        <div class="contador" id="contador" data-ate="60">60</div>
+        <div><strong>Exercícios com resposta</strong>
+          <p>Cada capítulo termina com questões de revisão e exercícios. As respostas explicam o raciocínio, para você chegar ao cliente sabendo o que fazer.</p></div>
+      </div>
       <ul class="lista">
-        <li>Exercícios com resposta ao fim de cada capítulo</li>
-        <li>Fórmulas e cálculos de cada etapa</li>
-        <li>Listas de verificação para usar em campo</li>
+        <li>Fórmulas de cada etapa, prontas para consultar</li>
+        <li>Listas de verificação para usar antes de cada visita</li>
         <li>Modelos de frases para propor, fechar e negociar</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="secao" id="pedido" aria-labelledby="h-pedido">
+    <div class="shell rev">
+      <div class="final">
+        <div class="olho" style="justify-content:center">Dê o primeiro passo</div>
+        <h2 id="h-pedido">Comece hoje a sua <span class="brilha">formação em vendas.</span></h2>
+        <p class="lede">O livro A Escola de Vendas chega até você. Peça pelo WhatsApp e comece a treinar ainda esta semana.</p>
+        <div class="chamada">
+          <div class="valor">Livro físico<b>R$ 49,90</b></div>
+          <a class="zap" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Pedir pelo WhatsApp ↗</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="rodape"><div class="shell">A Escola de Vendas · © 2026</div></footer>
+
+<div class="barra" id="barra" role="region" aria-label="Pedido">
+  <div class="txt"><small>Livro físico · R$ 49,90</small>Comece sua formação</div>
+  <a class="zap" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero o meu</a>
+</div>
+
+<script>
+(function () {
+  var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // frases que se digitam na abertura
+  var frases = ['Aprenda a ler os números.', 'Aprenda a entender o cliente.', 'Aprenda a conduzir a venda.',
+                'Aprenda a negociar sem ceder cedo.', 'Ganhe experiência mais rápido.', 'Comece hoje a sua formação.'];
+  var alvo = document.getElementById('frase');
+  if (alvo && !calmo) {
+    var i = 0, pos = frases[0].length, apagando = true;
+    function passo() {
+      var f = frases[i];
+      if (apagando) { pos--; if (pos <= 0) { apagando = false; i = (i + 1) % frases.length; } }
+      else { pos++; if (pos >= frases[i].length) { apagando = true; alvo.textContent = frases[i]; return setTimeout(passo, 1700); } }
+      alvo.textContent = frases[i].slice(0, Math.max(pos, 0)) || ' ';
+      setTimeout(passo, apagando ? 28 : 55);
+    }
+    setTimeout(passo, 1800);   // a primeira frase fica um tempo na tela antes de trocar
+  }
+
+  // seções que entram ao rolar, etapas em sequência e contador
+  var vistos = document.querySelectorAll('.rev, #etapas');
+  var contador = document.getElementById('contador');
+  function contar() {
+    if (!contador || contador.dataset.feito) return; contador.dataset.feito = '1';
+    if (calmo) return;
+    var fim = +contador.dataset.ate, t0 = null;
+    function quadro(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / 1400, 1); contador.textContent = Math.round(fim * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(quadro); }
+    requestAnimationFrame(quadro);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); if (e.target.querySelector('#contador')) contar(); io.unobserve(e.target); } });
+    }, { threshold: 0.18 });
+    vistos.forEach(function (el) { io.observe(el); });
+    var barra = document.getElementById('barra'), abertura = document.querySelector('.abertura');
+    new IntersectionObserver(function (es) { barra.classList.toggle('on', !es[0].isIntersecting); }, { threshold: 0 }).observe(abertura);
+  } else {
+    vistos.forEach(function (el) { el.classList.add('on'); });
+  }
+
+  // constelação de pontos de luz
+  var cv = document.getElementById('estrelas');
+  if (cv && cv.getContext && !calmo) {
+    var ctx = cv.getContext('2d'), pts = [], W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function medir() { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    medir(); window.addEventListener('resize', medir);
+    var n = Math.round(Math.min(70, (window.innerWidth * window.innerHeight) / 16000));
+    for (var k = 0; k < n; k++) pts.push({ x: Math.random(), y: Math.random() * 0.62, vx: (Math.random() - .5) * 0.00018, vy: (Math.random() - .5) * 0.00012, r: Math.random() * 1.6 + .6, o: Math.random() });
+    (function anima() {
+      ctx.clearRect(0, 0, W, H);
+      for (var a = 0; a < pts.length; a++) {
+        var p = pts[a]; p.x += p.vx; p.y += p.vy; p.o += 0.015;
+        if (p.x < 0 || p.x > 1) p.vx *= -1; if (p.y < 0 || p.y > 0.62) p.vy *= -1;
+        for (var b = a + 1; b < pts.length; b++) {
+          var q = pts[b], dx = (p.x - q.x) * W, dy = (p.y - q.y) * H, d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) { ctx.strokeStyle = 'rgba(97,206,242,' + (0.16 * (1 - d / 120)).toFixed(3) + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x * W, p.y * H); ctx.lineTo(q.x * W, q.y * H); ctx.stroke(); }
+        }
+        ctx.fillStyle = 'rgba(207,243,255,' + (0.45 + 0.4 * Math.sin(p.o)).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      requestAnimationFrame(anima);
+    })();
+  }
+})();
+</script>
 </body>
 </html>
