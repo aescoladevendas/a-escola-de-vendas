@@ -120,12 +120,41 @@ h2 { font-size: clamp(38px, 6.4vw, 60px); }
 html.js .rev { opacity: 0; transform: translateY(28px); }
 html.js .rev.on { opacity: 1; transform: none; }
 .etapas { margin-top: 26px; display: grid; gap: 10px; position: relative; }
-.etapa { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; align-items: center; padding: 15px 18px; border-radius: 14px;
-  background: var(--painel); border: 1px solid rgba(97, 206, 242, 0.3); transition: border-color .3s, transform .3s; }
-.etapa:hover { border-color: var(--amarelo); transform: translateX(6px); }
+.dica { margin: 18px 0 0; font: 700 14px/1.4 var(--texto); letter-spacing: .08em; text-transform: uppercase; color: var(--amarelo); }
+.dica span { display: inline-block; animation: desce 1.4s ease-in-out infinite; }
+@keyframes desce { 50% { transform: translateY(4px); } }
+.etapa { border-radius: 14px; background: var(--painel); border: 1px solid rgba(97, 206, 242, 0.3); transition: border-color .3s, box-shadow .3s, transform .3s; }
+.etapa:hover { border-color: var(--amarelo); }
+.etapa.aberta { border-color: var(--amarelo); box-shadow: 0 0 0 1px rgba(255,199,44,.35), 0 18px 40px rgba(0,0,0,.35); }
+.etapa-top { appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  width: 100%; display: grid; grid-template-columns: 56px minmax(0, 1fr) 40px; gap: 14px; align-items: center; padding: 15px 16px 15px 18px; border-radius: 14px; }
+.etapa-top:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
 .etapa .n { font: 800 34px/1 var(--titulo); color: var(--amarelo); }
+.etapa .et { color: var(--gelo); }
 .etapa b { display: block; font: 800 22px/1.1 var(--titulo); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azul); }
-html.js .etapas .etapa { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease, border-color .3s; }
+.mais { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(255,199,44,.75); position: relative; justify-self: end; transition: transform .35s ease, background .3s;
+  animation: chama-mais 2.6s ease-out infinite; }
+.mais::before, .mais::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; margin: -1px 0 0 -7px; background: var(--amarelo); border-radius: 2px; }
+.mais::after { transform: rotate(90deg); }
+.etapa.aberta .mais { transform: rotate(135deg); background: var(--amarelo); animation: none; }
+.etapa.aberta .mais::before, .etapa.aberta .mais::after { background: var(--tinta); }
+@keyframes chama-mais { 0% { box-shadow: 0 0 0 0 rgba(255,199,44,.45); } 70% { box-shadow: 0 0 0 10px rgba(255,199,44,0); } 100% { box-shadow: 0 0 0 0 rgba(255,199,44,0); } }
+.trecho { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s ease; }
+.etapa.aberta .trecho, html:not(.js) .trecho { grid-template-rows: 1fr; }
+.trecho-in { overflow: hidden; min-height: 0; }
+.trecho-pad { padding: 4px 20px 20px 88px; }
+@media (max-width: 560px) { .trecho-pad { padding: 2px 16px 18px 18px; } }
+.trecho .cap { font: 700 12px/1.4 var(--texto); letter-spacing: .16em; text-transform: uppercase; color: var(--azul); }
+.claim { margin: 8px 0 0; font: 600 italic clamp(19px, 2.4vw, 22px)/1.42 var(--texto); color: var(--gelo); min-height: 1.4em; }
+.claim::before { content: "“"; color: var(--amarelo); margin-right: 2px; } .claim::after { content: "”"; color: var(--amarelo); }
+.amostra { margin: 12px 0 0; color: var(--nevoa); -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent); mask-image: linear-gradient(180deg, #000 45%, transparent); }
+.amostra::after { content: " …"; } .amostra.inteira::after { content: none; }
+.etapa.aberta .amostra { animation: aparece .8s ease .25s both; }
+@keyframes aparece { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.segue { margin-top: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.segue span { font: 700 13px/1 var(--texto); letter-spacing: .14em; text-transform: uppercase; color: var(--amarelo); }
+.mini { font: 800 14px/1 var(--texto); text-decoration: none; color: var(--tinta); background: var(--amarelo); padding: 10px 14px; border-radius: 999px; }
+html.js .etapas .etapa { opacity: 0; transform: translateX(-24px); transition: opacity .6s ease, transform .6s ease, border-color .3s, box-shadow .3s; }
 html.js .etapas.on .etapa { opacity: 1; transform: none; }
 .etapas.on .etapa:nth-child(2) { transition-delay: .12s; } .etapas.on .etapa:nth-child(3) { transition-delay: .24s; }
 .etapas.on .etapa:nth-child(4) { transition-delay: .36s; } .etapas.on .etapa:nth-child(5) { transition-delay: .48s; }
@@ -225,12 +254,63 @@ html.js .etapas.on .etapa { opacity: 1; transform: none; }
         <div class="olho">O caminho</div>
         <h2 id="h-metodo">Cinco etapas, na ordem em que <span class="am">o trabalho acontece.</span></h2>
       </div>
+      <p class="dica">Toque em uma etapa e leia um trecho do capítulo <span aria-hidden="true">↓</span></p>
       <div class="etapas" id="etapas">
-        <div class="etapa"><span class="n">01</span><div><b>Dados</b>Ler o número certo antes de opinar</div></div>
-        <div class="etapa"><span class="n">02</span><div><b>Categoria</b>Achar onde o shopper pode comprar mais</div></div>
-        <div class="etapa"><span class="n">03</span><div><b>Valor</b>Fazer a conta nos dois P&amp;Ls, o seu e o do cliente</div></div>
-        <div class="etapa"><span class="n">04</span><div><b>Venda</b>Conduzir a conversa do objetivo ao fechamento</div></div>
-        <div class="etapa"><span class="n">05</span><div><b>Acordo</b>Negociar com limite, troca e contrapartida</div></div>
+        <div class="etapa">
+          <button class="etapa-top" type="button" id="bt01" aria-expanded="false" aria-controls="tr01">
+            <span class="n">01</span><span class="et"><b>Dados</b>Ler o número certo antes de opinar</span><span class="mais" aria-hidden="true"></span>
+          </button>
+          <div class="trecho" id="tr01" role="region" aria-labelledby="bt01"><div class="trecho-in"><div class="trecho-pad">
+            <div class="cap">Capítulo 1 · Leitura de dados</div>
+            <p class="claim" data-texto="O comprador do seu cliente já sabe quanto vendeu na semana passada; o que ele raramente sabe é por que vendeu, e é nesse espaço que um executivo comercial bem preparado passa a ser ouvido.">O comprador do seu cliente já sabe quanto vendeu na semana passada; o que ele raramente sabe é por que vendeu, e é nesse espaço que um executivo comercial bem preparado passa a ser ouvido.</p>
+            <p class="amostra">Executivos comerciais que sabem interpretar e comunicar dados com eficácia vendem mais do que os que dependem apenas de instinto e de relacionamento. […] Quem não consegue ler essa massa de informação com precisão acaba decidindo no escuro ou, pior,</p>
+            <div class="segue"><span>Continua no livro</span><a class="mini" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero ler ↗</a></div>
+          </div></div></div>
+        </div>
+        <div class="etapa">
+          <button class="etapa-top" type="button" id="bt02" aria-expanded="false" aria-controls="tr02">
+            <span class="n">02</span><span class="et"><b>Categoria</b>Achar onde o shopper pode comprar mais</span><span class="mais" aria-hidden="true"></span>
+          </button>
+          <div class="trecho" id="tr02" role="region" aria-labelledby="bt02"><div class="trecho-in"><div class="trecho-pad">
+            <div class="cap">Capítulo 2 · Crescimento de categorias</div>
+            <p class="claim" data-texto="Este capítulo ensina a fazer o bolo crescer junto com o cliente, partindo do que o shopper precisa e chegando a um plano de loja que funciona para os três lados da mesa.">Este capítulo ensina a fazer o bolo crescer junto com o cliente, partindo do que o shopper precisa e chegando a um plano de loja que funciona para os três lados da mesa.</p>
+            <p class="amostra">Como a categoria nasce de uma necessidade, ela só cresce quando mais pessoas passam a resolvê-la com os produtos da categoria, ou quando quem já a resolve passa a fazê-lo mais vezes, em maior quantidade ou</p>
+            <div class="segue"><span>Continua no livro</span><a class="mini" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero ler ↗</a></div>
+          </div></div></div>
+        </div>
+        <div class="etapa">
+          <button class="etapa-top" type="button" id="bt03" aria-expanded="false" aria-controls="tr03">
+            <span class="n">03</span><span class="et"><b>Valor</b>Fazer a conta nos dois P&amp;Ls, o seu e o do cliente</span><span class="mais" aria-hidden="true"></span>
+          </button>
+          <div class="trecho" id="tr03" role="region" aria-labelledby="bt03"><div class="trecho-in"><div class="trecho-pad">
+            <div class="cap">Capítulo 3 · Rigor financeiro</div>
+            <p class="claim" data-texto="Quem lê com a mesma fluência o P&amp;L do fabricante, o do varejista e o do distribuidor transforma cada conversa sobre preço, verba e prazo em uma conversa sobre resultado para os dois lados da mesa.">Quem lê com a mesma fluência o P&amp;L do fabricante, o do varejista e o do distribuidor transforma cada conversa sobre preço, verba e prazo em uma conversa sobre resultado para os dois lados da mesa.</p>
+            <p class="amostra">Boa parte dos executivos comerciais começa a carreira sendo medida por um único número: o volume do mês. […] O problema aparece meses depois, quando a receita cresceu, a margem encolheu e ninguém consegue explicar</p>
+            <div class="segue"><span>Continua no livro</span><a class="mini" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero ler ↗</a></div>
+          </div></div></div>
+        </div>
+        <div class="etapa">
+          <button class="etapa-top" type="button" id="bt04" aria-expanded="false" aria-controls="tr04">
+            <span class="n">04</span><span class="et"><b>Venda</b>Conduzir a conversa do objetivo ao fechamento</span><span class="mais" aria-hidden="true"></span>
+          </button>
+          <div class="trecho" id="tr04" role="region" aria-labelledby="bt04"><div class="trecho-in"><div class="trecho-pad">
+            <div class="cap">Capítulo 4 · Venda persuasiva</div>
+            <p class="claim" data-texto="Dados, categoria e números só viram resultado quando alguém do outro lado da mesa diz sim, e este capítulo ensina a construir esse sim com método.">Dados, categoria e números só viram resultado quando alguém do outro lado da mesa diz sim, e este capítulo ensina a construir esse sim com método.</p>
+            <p class="amostra">Muitas boas ideias comerciais se perdem justamente na passagem da análise para a conversa. Este capítulo organiza a venda em um roteiro que pode ser preparado, ensaiado e repetido, diante do comprador de uma rede ou</p>
+            <div class="segue"><span>Continua no livro</span><a class="mini" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero ler ↗</a></div>
+          </div></div></div>
+        </div>
+        <div class="etapa">
+          <button class="etapa-top" type="button" id="bt05" aria-expanded="false" aria-controls="tr05">
+            <span class="n">05</span><span class="et"><b>Acordo</b>Negociar com limite, troca e contrapartida</span><span class="mais" aria-hidden="true"></span>
+          </button>
+          <div class="trecho" id="tr05" role="region" aria-labelledby="bt05"><div class="trecho-in"><div class="trecho-pad">
+            <div class="cap">Capítulo 5 · Negociação</div>
+            <p class="claim" data-texto="Quando a venda já fez tudo o que podia e o cliente ainda pede algo em troca, começa a negociação, que também tem método: limites claros, aberturas calculadas e nenhuma concessão sem contrapartida.">Quando a venda já fez tudo o que podia e o cliente ainda pede algo em troca, começa a negociação, que também tem método: limites claros, aberturas calculadas e nenhuma concessão sem contrapartida.</p>
+            <p class="amostra inteira">Quando você tenta fechar uma venda, o cliente pode dizer “sim”, “talvez, mas…” ou “não, eu preciso de…”.</p>
+            <div class="segue"><span>Continua no livro</span><a class="mini" href="https://wa.me/5561999365520?text=Ol%C3%A1%21%20Quero%20o%20livro%20A%20Escola%20de%20Vendas%20%28livro%20f%C3%ADsico%2C%20R%24%2049%2C90%29." target="_blank" rel="noopener">Quero ler ↗</a></div>
+          </div></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -293,6 +373,25 @@ html.js .etapas.on .etapa { opacity: 1; transform: none; }
     }
     setTimeout(passo, 1800);   // a primeira frase fica um tempo na tela antes de trocar
   }
+
+  // etapas que abrem com um trecho do capítulo (uma aberta por vez); a chamada se digita ao abrir
+  var etapas = document.querySelectorAll('.etapa');
+  function digitar(el) {
+    var texto = el.getAttribute('data-texto'); if (calmo) { el.textContent = texto; return; }
+    clearTimeout(el._t); var k = 0; el.textContent = '';
+    (function vai() { k += 3; el.textContent = texto.slice(0, k); if (k < texto.length) el._t = setTimeout(vai, 16); })();
+  }
+  etapas.forEach(function (et) {
+    var bt = et.querySelector('.etapa-top');
+    bt.addEventListener('click', function () {
+      var abrir = !et.classList.contains('aberta');
+      etapas.forEach(function (o) { o.classList.remove('aberta'); o.querySelector('.etapa-top').setAttribute('aria-expanded', 'false'); });
+      if (abrir) {
+        et.classList.add('aberta'); bt.setAttribute('aria-expanded', 'true'); digitar(et.querySelector('.claim'));
+        setTimeout(function () { var r = et.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight - 90) et.scrollIntoView({ behavior: calmo ? 'auto' : 'smooth', block: 'center' }); }, 460);
+      }
+    });
+  });
 
   // seções que entram ao rolar, etapas em sequência e contador
   var vistos = document.querySelectorAll('.rev, #etapas');
